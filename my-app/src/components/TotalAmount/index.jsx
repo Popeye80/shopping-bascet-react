@@ -1,7 +1,6 @@
 import propTypes from "prop-types";
 import styles from "./style.module.css";
 
-
 const TotalAmount = ({ items }) => {
   const total = items.reduce((acc, item) => acc + item.count * item.price, 0);
 

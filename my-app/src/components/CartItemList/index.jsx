@@ -1,10 +1,12 @@
-import CartItem from "../CartItem";
 import propTypes from "prop-types";
 
-const CartItemList = ({ items }) => (
-  <div className="cart-item-list">
+import CartItem from "../CartItem";
+import styles from "./style.module.css";
+
+const CartItemList = ({ items, ...rest }) => (
+  <div className={styles.cartItemList}>
     {items.map((item) => (
-      <CartItem key={item.id} item={item} />
+      <CartItem key={item.id} item={item} {...rest} />
     ))}
   </div>
 );
