@@ -1,0 +1,46 @@
+{
+  "cart": [
+    {
+      "id": "212345",
+      "name": "RAM",
+      "price": 30,
+      "count": 2,
+      "extendedGuarantee": false
+    },
+    {
+      "id": "323522",
+      "name": "motherboard",
+      "price": 150,
+      "count": 1,
+      "extendedGuarantee": true
+    },
+    {
+      "id": "434556",
+      "name": "mouse",
+      "price": 15,
+      "count": 4,
+      "extendedGuarantee": false
+    },
+    {
+      "id": "434512",
+      "name": "CPU",
+      "price": 200,
+      "count": 1,
+      "extendedGuarantee": false
+    },
+    {
+      "count": 1,
+      "name": "printer",
+      "price": 40,
+      "extendedGuarantee": false,
+      "id": "6G23-BQ"
+    },
+    {
+      "count": 1,
+      "name": "saf",
+      "price": 10,
+      "extendedGuarantee": true,
+      "id": "_XlGRq8"
+    }
+  ]
+}

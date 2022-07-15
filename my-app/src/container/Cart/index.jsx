@@ -1,73 +1,98 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CartInputForm from "../../components/CartInputForm";
 import Loader from "../../components/Loader";
 import CartItemList from "../../components/CartItemList";
 import TotalAmount from "../../components/TotalAmount";
+import {
+  fetchCartItems,
+  deleteItem,
+  addItem,
+  updateItem,
+} from "../../api/cartApi";
+import { showSuccess } from "../../utils";
 import styles from "./styles.module.css";
-
-const initialState = [
-  { id: "183756", name: "printer", price: 110, count: 2 },
-  { id: "212345", name: "RAM", price: 30, count: 0 },
-  { id: "323522", name: "motherboard", price: 150, count: 1 },
-  { id: "434556", name: "mouse", price: 15, count: 4 },
-];
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [items, setItems] = useState(initialState);
-
-  // const handleDecrement = (id) =>
-  //   setItems((prev) =>
-  //     prev.map((item) =>
-  //       item.id === id
-  //         ? {
-  //             ...item,
-  //             count: item.count > 0 ? item.count - 1 : 0,
-  //           }
-  //         : item
-  //     )
-  //   );
-
-  // const handleIncrement = (id) =>
-  //   setItems((prev) =>
-  //     prev.map((item) =>
-  //       item.id === id
-  //         ? {
-  //             ...item,
-  //             count: item.count + 1,
-  //           }
-  //         : item
-  //     )
-  //   );
+  const [items, setItems] = useState([]);
+  const [error, setError] = useState("");
 
   // +1, -1
-  const handleChangeCount = (id, step) =>
+  const handleChangeCount = (id, step) => {
     setItems((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              count: item.count + step >= 0 ? item.count + step : item.count,
-            }
-          : item
-      )
-    );
+      prev.map((item) => {
+        if (item.id === id) {
+          const updatedItem = {
+            ...item,
+            count: item.count + step >= 0 ? item.count + step : item.count,
+          };
 
-  const handleRemoveItem = (id) =>
-    setItems((prev) => prev.filter((item) => item.id !== id));
+          updateItem(id, { count: updatedItem.count }).then(() => {
+            showSuccess("🦄 Wow so easy!");
+          });
+
+          return updatedItem;
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const handleRemoveItem = (id) => {
+    setIsLoading(true);
+
+    deleteItem(id)
+      .then(() => {
+        setItems((prev) => prev.filter((item) => item.id !== id));
+      })
+      .catch(({ message }) => setError(message))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleAddItem = (newItem) => {
+    setIsLoading(true);
+
+    addItem(newItem)
+      .then((data) => {
+        setItems((prev) => [...prev, data]);
+      })
+      .catch(({ message }) => setError(message))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    fetchCartItems()
+      .then(setItems)
+      .catch(({ message }) => setError(message))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []); // componentDidMount
+
+  // useEffect(() => {
+  // localStorage.setItem('cart', JSON.stringify(items));
+  // updateItem();
+  // }, [items]);
 
   return (
     <div className={styles.cart}>
-      <CartInputForm />
+      <CartInputForm onSubmit={handleAddItem} />
 
       {isLoading && <Loader />}
+
+      {error && <p>{error}</p>}
 
       <CartItemList
         items={items}
         onChangeCount={handleChangeCount}
         onRemoveItem={handleRemoveItem}
-        // onDecrement={handleDecrement}
-        // onIncrement={handleIncrement}
       />
       <TotalAmount items={items} />
     </div>

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { createUseStyles } from "react-jss";
 import { CloseButton } from "../Button";
@@ -44,7 +45,7 @@ const CartItem = ({ item, onRemoveItem, onChangeCount }) => {
   const increment = () => onChangeCount(item.id, 1);
   const remove = () => onRemoveItem(item.id);
 
-  // console.log("render item:", item.id);
+  console.log("render item:", item.id);
 
   return (
     <div className={styles.cartItem}>
@@ -59,7 +60,9 @@ const CartItem = ({ item, onRemoveItem, onChangeCount }) => {
         <button onClick={increment}>+</button>
       </div>
 
-      <span className={styles.amount}>{amount}$</span>
+      <span className={styles.amount}>
+        {amount}${item.extendedGuarantee && " +10%"}
+      </span>
       <CloseButton item={item} onClick={remove} />
     </div>
   );
@@ -74,6 +77,8 @@ CartItem.propTypes = {
   }),
   onRemoveItem: PropTypes.func.isRequired,
   onChangeCount: PropTypes.func.isRequired,
+  // onDecrement: PropTypes.func.isRequired,
+  // onIncrement: PropTypes.func.isRequired,
 };
 
 export default CartItem;
