@@ -4,7 +4,7 @@
       "id": "212345",
       "name": "RAM",
       "price": 30,
-      "count": 2,
+      "count": 3,
       "extendedGuarantee": false
     },
     {
@@ -25,22 +25,22 @@
       "id": "434512",
       "name": "CPU",
       "price": 200,
-      "count": 1,
+      "count": 3,
       "extendedGuarantee": false
     },
     {
-      "count": 1,
+      "count": 3,
       "name": "printer",
       "price": 40,
       "extendedGuarantee": false,
       "id": "6G23-BQ"
     },
     {
-      "count": 1,
-      "name": "saf",
-      "price": 10,
+      "count": 2,
+      "name": "hdd",
+      "price": 150,
       "extendedGuarantee": true,
-      "id": "_XlGRq8"
+      "id": "_EWmMtS"
     }
   ]
 }
