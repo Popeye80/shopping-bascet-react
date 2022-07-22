@@ -4,7 +4,7 @@
       "id": "212345",
       "name": "RAM",
       "price": 30,
-      "count": 3,
+      "count": 2,
       "extendedGuarantee": false
     },
     {
@@ -36,11 +36,18 @@
       "id": "6G23-BQ"
     },
     {
-      "count": 2,
+      "count": 1,
       "name": "hdd",
       "price": 150,
       "extendedGuarantee": true,
       "id": "_EWmMtS"
+    },
+    {
+      "count": 1,
+      "name": "ра",
+      "price": 10,
+      "extendedGuarantee": false,
+      "id": "-vJhE2t"
     }
   ]
 }
